@@ -1,4 +1,4 @@
-**Vehicle Detection Project**
+##Vehicle Detection And Tracking
 
 [//]: # (Image References)
 [image1]:  ./output_images/1_car_noncar.png
@@ -16,16 +16,6 @@
 [image13]: ./output_images/heat_boxes.png
 [video1]:  ./project_video.mp4
 
-## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
-###Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
-
----
-###Writeup / README
-
-####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  [Here](https://github.com/udacity/CarND-Vehicle-Detection/blob/master/writeup_template.md) is a template writeup for this project you can use as a guide and a starting point.  
-
-You're reading it!
-
 ###Histogram of Oriented Gradients (HOG)
 
 ####1. Explain how (and identify where in your code) you extracted HOG features from the training images.
@@ -40,8 +30,7 @@ I then explored different color spaces and different `skimage.hog()` parameters 
 
 Here is an example using the `YCrCb` color space and HOG parameters of `orientations=10`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
-
-![alt text][image8]
+![alt text][image2]
 
 ####2. Explain how you settled on your final choice of HOG parameters.
 
