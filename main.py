@@ -109,7 +109,7 @@ hist_bins = 16    # Number of histogram bins
 spatial_feat = True # Spatial features on or off
 hist_feat = True # Histogram features on or off
 hog_feat = True # HOG features on or off
-y_start_stop = [400, 550] # Min and max in y to search in slide_window()
+y_start_stop = [400, 700] # Min and max in y to search in slide_window()
 
 
 car_features = extract_features(cars, color_space=color_space, 
@@ -161,8 +161,14 @@ def image_pipeline(image):
     draw_image = np.copy(image)
     image = image.astype(np.float32)/255
 
-    windows = slide_window(image, x_start_stop=[None, None], y_start_stop=y_start_stop, 
+    windows = slide_window(image, x_start_stop=[None, None], y_start_stop=[400, 500], 
+                    xy_window=(80, 80), xy_overlap=(0.5, 0.5))
+                    
+    windows += slide_window(image, x_start_stop=[None, None], y_start_stop=[400, 600], 
                     xy_window=(96, 96), xy_overlap=(0.5, 0.5))
+                    
+    windows += slide_window(image, x_start_stop=[None, None], y_start_stop=[400, 700], 
+                    xy_window=(128, 128), xy_overlap=(0.5, 0.5))
 
     hot_windows = search_windows(image, windows, svc, X_scaler, color_space=color_space, 
                         spatial_size=spatial_size, hist_bins=hist_bins, 
@@ -182,8 +188,14 @@ def video_pipeline(image):
     draw_image = np.copy(image)    
     image = image.astype(np.float32)/255
 
-    windows = slide_window(image, x_start_stop=[None, None], y_start_stop=y_start_stop,
+    windows = slide_window(image, x_start_stop=[None, None], y_start_stop=[400, 500], 
+                    xy_window=(80, 80), xy_overlap=(0.5, 0.5))
+                    
+    windows += slide_window(image, x_start_stop=[None, None], y_start_stop=[400, 600], 
                     xy_window=(96, 96), xy_overlap=(0.5, 0.5))
+                    
+    windows += slide_window(image, x_start_stop=[None, None], y_start_stop=[400, 700],
+                    xy_window=(128, 128), xy_overlap=(0.5, 0.5))
 
     hot_windows = search_windows(image, windows, svc, X_scaler, color_space=color_space,
                         spatial_size=spatial_size, hist_bins=hist_bins,
@@ -273,7 +285,7 @@ false_positive_threshold = 5
 video = True
 
 if video == False:
-    images = glob.glob('1/*.jpg')
+    images = glob.glob('test_images/*.jpg')
 
     for idx, fname in enumerate(images):
         image = mpimg.imread(fname)
@@ -281,8 +293,8 @@ if video == False:
 
 else:
     # video processing
-    white_output = 'test_video_out.mp4'
-    clip1 = VideoFileClip("test_video.mp4")
+    white_output = 'project_video_out.mp4'
+    clip1 = VideoFileClip("project_video.mp4")
     white_clip = clip1.fl_image(video_pipeline)
     white_clip.write_videofile(white_output, audio=False)
 
