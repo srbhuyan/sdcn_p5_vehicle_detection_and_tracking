@@ -14,7 +14,7 @@
 [image11]: ./output_images/heat_6.png
 [image12]: ./output_images/heat_cars.png
 [image13]: ./output_images/heat_boxes.png
-[video1]:  ./project_video.mp4
+[video1]:  ./project_video_out.mp4
 
 ###Histogram of Oriented Gradients (HOG)
 
@@ -62,6 +62,7 @@ Lines 47 through 95 in the file `utils.py` contains the functions for feature ex
 ####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
 I did multiple test runs with different overlap and scale settings to find a suitable configuration. I settled with the following configuration for the sliding window:
+`
     windows = slide_window(image, x_start_stop=[None, None], y_start_stop=[400, 500],
                     xy_window=(96, 96), xy_overlap=(0.75, 0.75))
     windows += slide_window(image, x_start_stop=[None, None], y_start_stop=[400, 500],
@@ -70,7 +71,8 @@ I did multiple test runs with different overlap and scale settings to find a sui
                     xy_window=(192, 192), xy_overlap=(0.75, 0.75))
     windows += slide_window(image, x_start_stop=[None, None], y_start_stop=[460, 580],
                     xy_window=(192, 192), xy_overlap=(0.75, 0.75))
-					
+`
+
 The `slide_window()` function is defined in lines 101 through 140 in the file `utils.py`. The function is called with proper parameters in lines 164 through 171 and lines 192 through 198 in the file `main.py`.
 
 ![alt text][image3]
@@ -79,13 +81,15 @@ The `slide_window()` function is defined in lines 101 through 140 in the file `u
 
 Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
 
+![alt text][image3]
 ![alt text][image4]
+![alt text][image5]
 ---
 
 ### Video Implementation
 
 ####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](./project_video_out.mp4)
 
 
 ####2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
@@ -96,13 +100,18 @@ Here's an example result showing the heatmap from a series of frames of video, t
 
 ### Here are six frames and their corresponding heatmaps:
 
-![alt text][image5]
+![alt text][image6]
+![alt text][image7]
+![alt text][image8]
+![alt text][image9]
+![alt text][image10]
+![alt text][image11]
 
 ### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
-![alt text][image6]
+![alt text][image12]
 
 ### Here the resulting bounding boxes are drawn onto the last frame in the series:
-![alt text][image7]
+![alt text][image13]
 
 
 
