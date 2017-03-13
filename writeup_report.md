@@ -63,16 +63,14 @@ Lines 47 through 95 in the file `utils.py` contains the functions for feature ex
 ####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
 I did multiple test runs with different overlap and scale settings to find a suitable configuration. I settled with the following configuration for the sliding window:
-`
+    
     windows = slide_window(image, x_start_stop=[None, None], y_start_stop=[400, 500],
                     xy_window=(80, 80), xy_overlap=(0.5, 0.5))
-
     windows += slide_window(image, x_start_stop=[None, None], y_start_stop=[400, 600],
                     xy_window=(96, 96), xy_overlap=(0.5, 0.5))
-
     windows += slide_window(image, x_start_stop=[None, None], y_start_stop=[400, 700],
                     xy_window=(128, 128), xy_overlap=(0.5, 0.5))
-`
+
 ![alt text][image14]
 
 The `slide_window()` function is defined in lines 101 through 140 in the file `utils.py`. The function is called with proper parameters in lines 164 through 171 and lines 192 through 198 in the file `main.py`.
