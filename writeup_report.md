@@ -119,7 +119,7 @@ Here's an example result showing the heatmap from a series of frames of video, t
 
 ###Discussion
 
-####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+####Tracking Overlap: My current implementation does not clearly separate the bounding boxes When two vehicles are close to each other. This can be improved by implmenting a mechanism to track the moving centroid of the vehicles, so that the system can predict where a vehicle might appear in subsequent frames.
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+####Car vs Non-Car Objects: This model works well on the freeways, but it might fail if there are pedestrians/road works etc. on the road. To improve and generalize the model further to correctly detect cars from non-car objects we will need to train with a much lager dataset.
 
