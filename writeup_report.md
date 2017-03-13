@@ -19,11 +19,9 @@
 
 ###Histogram of Oriented Gradients (HOG)
 
-####1. Explain how (and identify where in your code) you extracted HOG features from the training images.
+I am using the `hog()` function from the package `skimage.feature` to extract the HOG features from the training images. The  hog feature extraction code can be found in the function named `get_hog_features()` in lines 7 through 24 in the file `utils.py`. The parameters for the hog feature extraction are set in lines 103 through 106 in the file named `main.py`.
 
-I am using the `hog()` function from the package `skimage.feature` to extract the HOG features from the training images. The  hog feature extraction code can be found in the function named `get_hog_features()` in lines 6 through 24 in the file `utils.py`. The parameters for the hog feature extraction are set in lines 103 through 106 in the file named `main.py`.
-
-To identify the correct parameters for HOG I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
+To identify the correct parameters for HOG I started by reading in and analyzing random samples from the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
 ![alt text][image1]
 
@@ -33,9 +31,9 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
 
 ![alt text][image2]
 
-####2. Explain how you settled on your final choice of HOG parameters.
+####HOG parameters
 
-Then I trained the dataset with various combinations of parameters to the `skimage.hog()`. I found the following winning combination of the hog parameters which resulted in a test accuracy of ~99%.
+To get to an optimum set of HOG parameters to use for feature extraction, I trained our dataset with various values of the `orient`, `pix_per_call` and `hog_channel` parameters. I found the following winning combination of HOG parameters which resulted in a test accuracy of ~99%.
 `
 orient = 10 
 pix_per_cell = 8
@@ -45,17 +43,20 @@ hog_channel = 'ALL'
 
 ####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-The dataset provided contains 17,760 images of 64x64 pixels, of with 8792 samples labeled as car and 8968 sampled labeled as non-car. I used `LinearSVC` from the `sklearn.svm` package for training the dataset. I used the following combination of parameters to extract features from the dataset for training. The code the configuration of the parameters can be found in lines 101 through 113 in the file `main.py`.
+The dataset provided contains 17,760 images of 64x64 pixels, of with 8792 samples labeled as car and 8968 sampled labeled as non-car. We used spatial, color channel histogram and hog features for training the classifer.
 
+####Spatial Features
+For the spatial features the images were resized to (16,16) and flattened.
+`features = cv2.resize(img, size).ravel()`
+####Histogram Features
+Color histogram information from each channel was extracted by using 16 bins and a range of (0, 255).
 `
-color_space = 'YCrCb'
-orient = 10
-pix_per_cell = 8
-cell_per_block = 2
-hog_channel = 'ALL'
-spatial_size = (16, 16)
-hist_bins = 16
+ channel1_hist = np.histogram(img[:,:,0], bins=nbins, range=bins_range)
+ channel2_hist = np.histogram(img[:,:,1], bins=nbins, range=bins_range)
+ channel3_hist = np.histogram(img[:,:,2], bins=nbins, range=bins_range)
 `
+NOTE: HOG feature extraction if described in the section above named 'HOG parameters'.
+
 Lines 47 through 95 in the file `utils.py` contains the functions for feature extraction. 
 
 ###Sliding Window Search
@@ -74,8 +75,6 @@ I did multiple test runs with different overlap and scale settings to find a sui
 ![alt text][image14]
 
 The `slide_window()` function is defined in lines 101 through 140 in the file `utils.py`. The function is called with proper parameters in lines 164 through 171 and lines 192 through 198 in the file `main.py`.
-
-![alt text][image3]
 
 ####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
