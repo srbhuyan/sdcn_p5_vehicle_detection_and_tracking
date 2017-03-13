@@ -34,36 +34,36 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
 ####HOG parameters
 
 To get to an optimum set of HOG parameters to use for feature extraction, I trained our dataset with various values of the `orient`, `pix_per_call` and `hog_channel` parameters. I found the following winning combination of HOG parameters which resulted in a test accuracy of ~99%.
-`
-orient = 10 
-pix_per_cell = 8
-cell_per_block = 2 
-hog_channel = 'ALL'
-`
 
-####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
+    orient = 10
+    pix_per_cell = 8
+    cell_per_block = 2
+    hog_channel = 'ALL'
+
+####Training
 
 The dataset provided contains 17,760 images of 64x64 pixels, of with 8792 samples labeled as car and 8968 sampled labeled as non-car. We used spatial, color channel histogram and hog features for training the classifer.
 
 ####Spatial Features
 For the spatial features the images were resized to (16,16) and flattened.
-`features = cv2.resize(img, size).ravel()`
+
+     features = cv2.resize(img, size).ravel()
+       
 ####Histogram Features
 Color histogram information from each channel was extracted by using 16 bins and a range of (0, 255).
-`
- channel1_hist = np.histogram(img[:,:,0], bins=nbins, range=bins_range)
- channel2_hist = np.histogram(img[:,:,1], bins=nbins, range=bins_range)
- channel3_hist = np.histogram(img[:,:,2], bins=nbins, range=bins_range)
-`
+
+    channel1_hist = np.histogram(img[:,:,0], bins=nbins, range=bins_range)
+    channel2_hist = np.histogram(img[:,:,1], bins=nbins, range=bins_range)
+    channel3_hist = np.histogram(img[:,:,2], bins=nbins, range=bins_range)
+
 NOTE: HOG feature extraction if described in the section above named 'HOG parameters'.
 
 Lines 47 through 95 in the file `utils.py` contains the functions for feature extraction. 
 
 ###Sliding Window Search
 
-####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
-
-I did multiple test runs with different overlap and scale settings to find a suitable configuration. I settled with the following configuration for the sliding window:
+####Sliding Window
+I use a sliding window approach to detect vehicles in the video frame. I did multiple test runs with different overlap and scale settings to find a suitable configuration. I settled with the following configuration for the sliding window:
     
     windows = slide_window(image, x_start_stop=[None, None], y_start_stop=[400, 500],
                     xy_window=(80, 80), xy_overlap=(0.5, 0.5))
@@ -71,6 +71,8 @@ I did multiple test runs with different overlap and scale settings to find a sui
                     xy_window=(96, 96), xy_overlap=(0.5, 0.5))
     windows += slide_window(image, x_start_stop=[None, None], y_start_stop=[400, 700],
                     xy_window=(128, 128), xy_overlap=(0.5, 0.5))
+
+Following is a visual of the windows we will be using.
 
 ![alt text][image14]
 
