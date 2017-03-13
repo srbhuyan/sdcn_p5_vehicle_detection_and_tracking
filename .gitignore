@@ -1,0 +1,16 @@
+.ipynb_checkpoints/
+__pycache__/
+*bak.py
+.DS_Store
+*.swp
+*.zip
+bbox_pickle.p
+cars_noncars_smallset/
+non-vehicles/
+non-vehicles_smallset/
+nv/
+v/
+vehicles/
+vehicles_smallset/
+test.ipynb
+
