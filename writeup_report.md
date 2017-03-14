@@ -72,7 +72,7 @@ I use a sliding window approach to detect vehicles in the video frame. I did mul
     windows += slide_window(image, x_start_stop=[None, None], y_start_stop=[400, 700],
                     xy_window=(128, 128), xy_overlap=(0.5, 0.5))
 
-Following is a visual of the windows we will be using.
+Following is a visual of the windows used.
 
 ![alt text][image14]
 
