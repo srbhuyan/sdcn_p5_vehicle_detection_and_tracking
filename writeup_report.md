@@ -78,7 +78,7 @@ Following is a visual of the windows we will be using.
 
 The `slide_window()` function is defined in lines 101 through 140 in the file `utils.py`. The function is called with proper parameters in lines 164 through 171 and lines 192 through 198 in the file `main.py`.
 
-####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
+####Pipeline Performance
 
 To get an optimum result I used the feature extraction parameters described in the section 'Training'. I used the YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images of the result I achieved:
 
@@ -95,7 +95,7 @@ Here's a [link to my video result](./project_video_out.mp4)
 
 ####Filtering False Positives and Combining Overlapping Bounding Boxes
 
-I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
+I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle. I am tracking 10 frames (line 282 in `main.py`) of the video for overlapping boxes and to build the heatmap. I am using a threshold of 5 (line 283 in `main.py`) to filter false positives. The implementation can be found in the functions defined in lines 230 through 277 in file `main.py`.
 
 Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
 
