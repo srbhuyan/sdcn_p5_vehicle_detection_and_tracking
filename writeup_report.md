@@ -33,7 +33,7 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
 
 ####HOG parameters
 
-To get to an optimum set of HOG parameters to use for feature extraction, I trained our dataset with various values of the `orient`, `pix_per_call` and `hog_channel` parameters. I found the following winning combination of HOG parameters which resulted in a test accuracy of ~99%.
+To get to an optimum set of HOG parameters to use for feature extraction, I trained our dataset with various values of the `orient`, `pix_per_call` and `hog_channel` parameters. I found the following winning combination of HOG parameters which resulted in a test accuracy of ~99% (in combination with spatial and color histogram features).
 
     orient = 10
     pix_per_cell = 8
