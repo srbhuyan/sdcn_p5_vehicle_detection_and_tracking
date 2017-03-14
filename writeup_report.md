@@ -118,7 +118,7 @@ Here's an example result showing the heatmap from a series of frames of video, t
 
 ---
 
-###Discussion
+###Future Improvements
 
 ####Tracking Overlap: 
 My current implementation does not clearly separate the bounding boxes When two vehicles are close to each other. This can be improved by implmenting a mechanism to track the moving centroid of the vehicles, so that the system can predict where a vehicle might appear in subsequent frames.
