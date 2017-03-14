@@ -80,7 +80,7 @@ The `slide_window()` function is defined in lines 101 through 140 in the file `u
 
 ####Pipeline Performance
 
-To get an optimum result I used the feature extraction parameters described in the section 'Training'. I used the YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images of the result I achieved:
+To get an optimum result I used the feature extraction parameters described in the 'Training' section above. I used the YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images of the result I achieved:
 
 ![alt text][image3]
 ![alt text][image4]
