@@ -21,7 +21,7 @@
 
 I am using the `hog()` function from the package `skimage.feature` to extract the HOG features from the training images. The  hog feature extraction code can be found in the function named `get_hog_features()` in lines 7 through 24 in the file `utils.py`. The parameters for the hog feature extraction are set in lines 103 through 106 in the file named `main.py`.
 
-To identify the correct parameters for HOG I started by reading in and analyzing random samples from the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
+To identify the correct parameters for HOG I started by reading in and analyzing random samples from the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` (image on left) and `non-vehicle` (image on right) classes.
 
 ![alt text][image1]
 
